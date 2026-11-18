@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Игры Canvas</title><link rel="stylesheet" href="style.css"></head>
+<body><a href="index.html">Главная</a><h1>Игры Canvas</h1>
+<section><h2>Лабиринт 25×25</h2><canvas id="maze" width="375" height="375"></canvas></section>
+<section>
+<h2>Лабиринты и Boulder Dash</h2>
+<p><label>Режим <select id="mode"><option value="boxes">Стены, ящики и песок</option><option value="pits">Яблоки и ямы</option><option value="targets">Яблоки и места хранения</option><option value="boulder">Boulder Dash</option></select></label> <button id="reset">Сначала</button></p>
+<p>Управление стрелками. В Boulder Dash собери кристаллы и дойди до выхода.</p>
+<p id="status" role="status"></p><canvas id="game"></canvas>
+</section>
+
+<script src="games.js"></script>
+</body></html>

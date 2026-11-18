@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Canvas</title><link rel="stylesheet" href="style.css"></head>
+<body><a href="index.html">Главная</a><h1>Canvas</h1>
+<section><h2>Домик</h2><canvas id="house" width="440" height="230"></canvas></section>
+<section><h2>Лес</h2><canvas id="forest" width="440" height="200"></canvas></section>
+<section><h2>График y = sin(x)</h2><canvas id="chart" width="440" height="220"></canvas></section>
+<script>
+const house = document.querySelector('#house').getContext('2d');
+house.fillStyle = '#d6e9ef';
+house.fillRect(0, 0, 440, 230);
+house.fillStyle = '#d9a574';
+house.fillRect(120, 100, 200, 118);
+house.beginPath();
+house.moveTo(100, 100);
+house.lineTo(220, 22);
+house.lineTo(340, 100);
+house.closePath();
+house.fillStyle = '#873d31';
+house.fill();
+house.fillStyle = '#6c4832';
+house.fillRect(207, 150, 40, 68);
+house.fillStyle = '#547e99';
+house.fillRect(148, 130, 42, 38);
+house.fillRect(263, 130, 42, 38);
+const forest = document.querySelector('#forest').getContext('2d');
+forest.fillStyle = '#dcebd2';
+forest.fillRect(0, 0, 440, 200);
+const tree = new Image();
+tree.onload = () => {
+  for (const [x, y, w, h] of [[8,45,80,125],[65,15,82,125],[125,55,88,140],[195,15,82,135],[250,45,84,125],[315,5,84,135],[355,50,80,140]]) {
+    forest.drawImage(tree, x, y, w, h);
+  }
+};
+tree.src = 'tree.svg';
+const chart = document.querySelector('#chart').getContext('2d');
+chart.beginPath();
+chart.moveTo(15, 110);
+chart.lineTo(425, 110);
+chart.moveTo(220, 12);
+chart.lineTo(220, 208);
+chart.stroke();
+chart.fillText('x', 424, 104);
+chart.fillText('y', 228, 15);
+chart.beginPath();
+for (let pixel = 15; pixel <= 425; pixel++) {
+  const y = 110 - 75 * Math.sin((pixel - 220) * Math.PI / 100);
+  if (pixel === 15) chart.moveTo(pixel, y);
+  else chart.lineTo(pixel, y);
+}
+chart.strokeStyle = '#2364a0';
+chart.lineWidth = 2;
+chart.stroke();
+</script></body></html>

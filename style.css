@@ -1,0 +1,19 @@
+body { font-family: system-ui, sans-serif; max-width: 1050px; margin: 24px auto; padding: 0 16px; background-color: #f7f7f1; color: #242420; line-height: 1.5; }
+nav { display: flex; flex-wrap: wrap; gap: 14px; }
+article, section { border: 1px solid #c9c9be; border-radius: 8px; background-color: white; padding: 12px; margin-block: 12px; }
+a { color: #245348; text-decoration-thickness: 2px; }
+canvas { max-width: 100%; vertical-align: middle; }
+table { border-collapse: collapse; }
+td { border: 1px solid #ccc; text-align: center; width: 34px; }
+button, input { font: inherit; }
+.track { height: 105px; position: relative; overflow: hidden; background: #eef2e7; }
+.mover { position: absolute; top: 0; left: 0; width: 45px; height: 22px; background: #248536; }
+#grow-frame { height: 400px; display: grid; place-items: center; overflow: hidden; }
+#grow { width: 200px; height: 200px; background: #258938; }
+#heart { width: 100px; height: 100px; display: block; margin: 20px auto; transform-origin: center; animation: beat .125s ease-in-out infinite alternate; }
+@keyframes beat { to { transform: scale(1.2); } }
+#joy { position: fixed; bottom: 12px; right: 12px; z-index: 5; background: #e0e8d9; padding: 8px; border-radius: 8px; display: grid; grid-template-columns: repeat(3, 64px); gap: 4px; }
+#joy input:first-child, #joy input:last-child { grid-column: 2; } #joy input:first-child { grid-row: 1; } #joy input:nth-child(2) { grid-column: 1; grid-row: 2; } #joy input:nth-child(3) { grid-column: 3; grid-row: 2; } #joy input:last-child { grid-row: 3; }
+#hero { position: fixed; top: 0; left: 0; z-index: 4; width: 25px; height: 25px; background: #286599; border-radius: 40%; }
+#event-box { width: 100px; height: 65px; background: green; }
+

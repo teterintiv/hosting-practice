@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JavaScript</title><link rel="stylesheet" href="style.css"></head>
+<body><a href="index.html">Главная</a><h1>JavaScript</h1>
+<section><h2>Квадрат от 200 до 400 пикселей</h2><div id="grow-frame"><div id="grow"></div></div></section>
+<section><h2>Движение от края до края</h2><div class="track"><div class="mover"></div></div></section>
+<section><h2>Движение по синусоиде</h2><div class="track"><div class="mover"></div></div></section>
+<section><h2>Сердце, 4 удара в секунду</h2><svg id="heart" viewBox="0 0 100 100"><path fill="#be3037" d="M50 89 13 52C-16 22 22 0 50 28 78 0 116 22 87 52Z"/></svg></section>
+<section><h2>Цвет по событию</h2><p>Нажми на прямоугольник и отведи курсор.</p><div id="event-box"></div></section>
+<section><h2>Таблица 10×10</h2>
+<script>
+document.write('<table>');
+for (let row = 0; row < 10; row++) {
+  document.write('<tr>');
+  for (let col = 1; col <= 10; col++) document.write('<td>' + (row * 10 + col) + '</td>');
+  document.write('</tr>');
+}
+document.write('</table>');
+</script></section>
+<div id="hero"></div>
+<div id="joy" aria-label="Джойстик">
+<input type="button" value="Вверх" data-dx="0" data-dy="-20">
+<input type="button" value="Влево" data-dx="-20" data-dy="0">
+<input type="button" value="Вправо" data-dx="20" data-dy="0">
+<input type="button" value="Вниз" data-dx="0" data-dy="20">
+</div>
+<script>
+const grow = document.querySelector('#grow');
+const movers = [...document.querySelectorAll('.mover')];
+const started = performance.now();
+setInterval(() => {
+  const seconds = (performance.now() - started) / 1000;
+  const size = 300 - 100 * Math.cos(seconds * Math.PI);
+  grow.style.width = grow.style.height = size + 'px';
+  const phase = (seconds % 8) / 8;
+  movers.forEach((mover, index) => {
+    const x = phase * (mover.parentElement.clientWidth - mover.offsetWidth);
+    const y = index ? 40 + 37 * Math.sin(phase * 4 * Math.PI) : 40;
+    mover.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  });
+}, 16);
+const box = document.querySelector('#event-box');
+box.onclick = () => box.style.backgroundColor = 'red';
+box.onmouseleave = () => box.style.backgroundColor = 'green';
+const hero = document.querySelector('#hero');
+let x = 15;
+let y = 15;
+function move(dx, dy) {
+  x = Math.max(0, Math.min(innerWidth - hero.offsetWidth, x + dx));
+  y = Math.max(0, Math.min(innerHeight - hero.offsetHeight, y + dy));
+  hero.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+}
+move(0, 0);
+document.querySelectorAll('#joy input').forEach(button => {
+  button.onclick = () => move(Number(button.dataset.dx), Number(button.dataset.dy));
+});
+window.addEventListener('resize', () => move(0, 0));
+</script></body></html>
+
